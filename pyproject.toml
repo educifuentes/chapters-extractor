@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "epub-toc-md"
+version = "0.1.0"
+description = "Generate Markdown Table of Contents from EPUB files"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = ["ebooklib"]  # or empty list if you only use stdlib
+
+[project.scripts]
+epub-toc-md = "epub_toc_md:main"
