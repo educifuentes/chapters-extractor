@@ -62,9 +62,29 @@ def toc_to_markdown(epub_path: Path):
     base_name = epub_path.stem
     output_file = epub_path.with_name(f"{base_name} - ToC.md")
 
-    md_lines = []
+    # Get book title from metadata
+    book_title = "Untitled"
+    if 'http://purl.org/dc/elements/1.1/' in book.metadata:
+        titles = book.metadata.get('http://purl.org/dc/elements/1.1/', {}).get('title', [])
+        if titles:
+            book_title = titles[0][0] if isinstance(titles[0], tuple) else titles[0]
 
+    md_lines = []
+    
+    # Add h1 title with the book title
+    md_lines.append(f"# {book_title}")
+    md_lines.append("")  # Empty line after title
+
+    # Collect all TOC titles and create a set of titleized versions
+    toc_titles = []
+    titleized_toc = set()
+    
     for title, level in walk_toc(book.toc, level=0):
+        toc_titles.append((title, level))
+        titleized_toc.add(title.title())
+
+    # Add TOC entries to markdown
+    for title, level in toc_titles:
         heading_level = level + 2     # level 0 → ##, level 1 → ###, etc.
         hashes = "#" * heading_level
         md_lines.append(f"{hashes} {title}")
