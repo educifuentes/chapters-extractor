@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-epub_toc_to_markdown.py
+epub_toc.py
 
 Extract the hierarchical table of contents (TOC) from an EPUB file and save it
 as a Markdown file named:
@@ -14,7 +14,9 @@ Hierarchy:
     etc.
 
 Usage:
-    python epub_toc_to_markdown.py book.epub
+    python -m epub_toc.epub_toc book.epub
+    or
+    epub-toc-md book.epub
 """
 
 import argparse
