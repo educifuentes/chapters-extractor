@@ -91,7 +91,7 @@ def toc_to_markdown(epub_path: Path):
 
     output_file.write_text("\n".join(md_lines) + "\n", encoding="utf-8")
 
-    print(f"[OK] TOC saved to: {output_file}")
+    print(f"✅ Success! Table of contents saved to: {output_file}")
 
 
 def main():
